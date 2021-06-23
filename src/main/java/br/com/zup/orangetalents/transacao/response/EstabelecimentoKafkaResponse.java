@@ -1,8 +1,10 @@
-package br.com.zup.orangetalents.transacao.responses;
+package br.com.zup.orangetalents.transacao.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class EstabelecimentoResponse {
+import br.com.zup.orangetalents.transacao.model.Estabelecimento;
+
+public class EstabelecimentoKafkaResponse {
 
 	@JsonProperty("nome")
 	private String nome;
@@ -11,11 +13,15 @@ public class EstabelecimentoResponse {
 	@JsonProperty("endereco")
 	private String endereco;
 
-	public EstabelecimentoResponse(@JsonProperty("nome") String nome, @JsonProperty("cidade") String cidade,
+	public EstabelecimentoKafkaResponse(@JsonProperty("nome") String nome, @JsonProperty("cidade") String cidade,
 			@JsonProperty("endereco") String endereco) {
 		this.nome = nome;
 		this.cidade = cidade;
 		this.endereco = endereco;
+	}
+
+	public Estabelecimento toModel() {
+		return new Estabelecimento(this.nome, this.cidade, this.endereco);
 	}
 
 	@Override
